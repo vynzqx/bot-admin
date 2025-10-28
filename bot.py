@@ -16,6 +16,12 @@ async def on_ready():
 async def start(ctx):
     await ctx.send("Hi! I'm a chat manager bot!")
 
+@bot.event
+async def on_message(message):
+    if 'https://' in message.content:
+        await message.channel.send("User {member.name} sharing links is not allowed!")
+
+
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.Member = None):
